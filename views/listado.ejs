@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <%  var estados = { 'E':'Enviado','A':'Autorizado','R':'Rechazado' }; %>  
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <title>
+    Prospectos - Listado
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- Nucleo Icons -->
+  <link href="/css/nucleo-icons.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="/css/blk-design-system.css?v=1.0.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="/demo/demo.css" rel="stylesheet" />
+</head>
+
+<body class="index-page">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="100">
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="https://demos.creative-tim.com/blk-design-system/index.html" target="_blank">
+          <span>Listado</span>
+        </a>
+        <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse justify-content-end" id="navigation">
+        <div class="navbar-collapse-header">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a>
+                Prospectos
+              </a>
+            </div>
+            <div class="col-6 collapse-close text-right">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <ul class="navbar-nav">
+
+          <li class="nav-item active">
+            <a href="/" class="nav-link">Inicio</a>
+          </li>
+          <li class="nav-item active">
+            <a href="captura" class="nav-link">Captura</a>
+          </li>
+          <li class="nav-item">
+              <a href="listado" class="nav-link">Listado</a>
+          </li>
+          <li class="nav-item">
+            <a href="evaluacion" class="nav-link">Evaluación</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <div class="wrapper">
+  
+    <div class="main">
+      
+      <div class="section section-signup">
+        <div class="container"> 
+
+          <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">Nombre</th>
+                    <th>Primer apellido</th>
+                    <th>Sgundo apellido</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+<%          if(data.length){
+              for(var i = 0; i< data.length; i++) {%>  
+                <tr>
+                  <td><%= data[i].nombre%></td>
+                  <td><%= data[i].apellido1%></td>
+                  <td><%= data[i].apellido2%></td>
+<%                for(var clave in estados){
+                    if (clave == data[i].estado) { %>
+                      <td><%= estados[clave] %></td>
+<%                  }
+                  } %>
+                  <td class="td-actions text-right">
+                    <button type="button" class="btn btn-info btn-sm btn-icon btn-infoprospecto" 
+                      data-idprospecto="<%= data[i].id%>" 
+                      data-nombre="<%= data[i].nombre%>" 
+                      data-apellido1="<%= data[i].apellido1%>" 
+                      data-apellido2="<%= data[i].apellido2%>" 
+                      data-calle="<%= data[i].calle%>" 
+                      data-numero="<%= data[i].numero%>" 
+                      data-colonia="<%= data[i].colonia%>" 
+                      data-cp="<%= data[i].codigo_postal%>" 
+                      data-telefono="<%= data[i].telefono%>" 
+                      data-rfc="<%= data[i].rfc%>" 
+                      data-motivo="<%= data[i].motivo%>" 
+                      data-status="<%= data[i].estado%>" 
+                      data-estado="<%   for(var clave in estados){
+                                          if (clave == data[i].estado) { %>
+                                            <td><%= estados[clave] %></td>
+                                  <%      }
+                                        } %>">
+                        <i class="tim-icons icon-single-02"></i>
+                    </button>
+                  </td>
+                </tr>
+<%            }
+            }else{ %>
+              <tr>
+                <td colspan="5" class="text-center">No hay registros</td>
+              </tr>
+<%          } %>  
+            </tbody>
+          </table>
+        </div>
+      </div>
+     
+    </div>
+    
+  </div>
+
+
+  <div class="modal fade modal-black" id="ModalInfoProspecto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            <i class="tim-icons icon-simple-remove text-white"></i>
+          </button>
+          <div class="text-muted text-center ml-auto mr-auto">
+            <h3 class="mb-0">Información de prospecto</h3>
+          </div>
+        </div>
+        <div class="modal-body">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-4">
+                <h6>Nombre: </h6>
+                <h4 id="ModalInfoProspecto_nombre"></h4>
+              </div>
+              <div class="col-4">
+                <h6>Primer apellido: </h6>
+                <h4 id="ModalInfoProspecto_apellido1"></h4>
+              </div>
+              <div class="col-4">
+                <h6>Segundo apellido: </h6>
+                <h4 id="ModalInfoProspecto_apellido2"></h4>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-8">
+                <h6>Calle: </h6>
+                <h4 id="ModalInfoProspecto_calle"></h4>
+              </div>
+              <div class="col-4">
+                <h6>Número: </h6>
+                <h4 id="ModalInfoProspecto_numero"></h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8">
+                <h6>Colonia: </h6>
+                <h4 id="ModalInfoProspecto_colonia"></h4>
+              </div>
+              <div class="col-4">
+                <h6>Código postal: </h6>
+                <h4 id="ModalInfoProspecto_cp"></h4>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4">
+                <h6>Teléfono: </h6>
+                <h4 id="ModalInfoProspecto_telefono"></h4>
+              </div>
+              <div class="col-4">
+                <h6>RFC: </h6>
+                <h4 id="ModalInfoProspecto_rfc"></h4>
+              </div>
+              <div class="col-4">
+                <h6>Estado: </h6>
+                <h4 id="ModalInfoProspecto_estado"></h4>
+              </div>
+            </div>
+            <div class="row d-none" id="ModalInfoProspecto_row_motivo">
+              <div class="col-12">
+                <h6>Motivo de rechazo: </h6>
+                <h4 id="ModalInfoProspecto_motivo"></h4>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-12">
+                <h4>Documentos</h4>
+              </div>
+              <div class="col-12" id="div_files">
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <form id="file_download" action="/listado/descargar_archivo" accept-charset="utf-8" method="get" target="_blank">
+    <input type="hidden" name="file">
+    <input type="hidden" name="ruta">
+  </form>
+
+
+  <!--   Core JS Files   -->
+  <script src="/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="/js/core/bootstrap.min.js" type="text/javascript"></script>
+  <script src="/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+  <script src="/js/plugins/bootstrap-switch.js"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="/js/plugins/nouislider.min.js" type="text/javascript"></script>
+  <!-- Chart JS -->
+  <script src="/js/plugins/chartjs.min.js"></script>
+  <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+  <script src="/js/plugins/moment.min.js"></script>
+  <script src="/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+  <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+  <script src="/demo/demo.js"></script>
+  <!-- Control Center for Black UI Kit: parallax effects, scripts for the example pages etc -->
+  <script src="/js/blk-design-system.min.js?v=1.0.0" type="text/javascript"></script>
+
+
+  <script src="/js/views/listado.js" type="text/javascript"></script>
+ 
+
+  <script>
+    $(document).ready(function() {
+      blackKit.initDatePicker();
+      blackKit.initSliders();
+    });
+
+    function scrollToDownload() {
+
+      if ($('.section-download').length != 0) {
+        $("html, body").animate({
+          scrollTop: $('.section-download').offset().top
+        }, 1000);
+      }
+    }
+  </script>
+</body>
+
+</html>
