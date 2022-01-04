@@ -1,10 +1,12 @@
 {
   "name": "ejercicio",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
+  "author": "Miguel Acosta",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.1",
     "cookie-parser": "~1.4.4",

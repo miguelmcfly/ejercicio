@@ -1,5 +1,4 @@
 
-
 $('.btn-infoprospecto').off('click').on('click',function(){
 
   let idprospecto = $(this).data('idprospecto');

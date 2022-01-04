@@ -8,9 +8,8 @@ const conn = require('../lib/database.js');
 
 
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('captura', { title: 'Prospectos' });
+  res.render('captura');
 });
 
 
@@ -33,10 +32,8 @@ router.post('/fileupload', function (req, res){
               console.log('Se registro con exito '+res.insertId);
               let id = res.insertId;
 
-              //console.log(fields);
-              //console.log(JSON.parse(fields.names_uploads));
+              
               var names_uploads = JSON.parse(fields.names_uploads);
-              //console.log(files);
 
               //bloque para guardar los archivos
               var dir = __dirname + '\\..\\uploads\\'+id+'\\';

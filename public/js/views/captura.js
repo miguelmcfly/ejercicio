@@ -1,6 +1,4 @@
 
-let archivos;
-
 $('#btn_enviar_prospecto').off('click').on('click',function(){
   let guardar = true;
 

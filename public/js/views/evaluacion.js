@@ -1,5 +1,4 @@
 
-
 $('.btn-infoprospecto').off('click').on('click',function(){
 
   let idprospecto = $(this).data('idprospecto');
@@ -129,23 +128,37 @@ $('.btn-rechprospecto').off('click').on('click',function(){
 });
 
 $('#btn_guardar_rechazoprospecto').off('click').on('click',function () {
+  let guardar = true;
+
   let idprospecto = $('#ModalRechazaProspecto_idprospecto').val();
   let motivo = $('#ModalRechazaProspecto_motivo').val();
 
-  $.ajax({
-    url: "/evaluacion/refuse_prospecto",
-    type: "POST",
-    data: "idprospecto="+idprospecto+
-          "&motivo="+motivo,
-    success: function(data) {
-      console.log(data);
-      console.log('process sucess');
+  if(motivo == ''){
+    guardar = false;
+    $('#ModalRechazaProspecto_motivo').addClass('is-invalid');
+  }
 
-      window.location.href = "http://localhost:3000/evaluacion";
-    },
-    error: function() {
-      console.log('process error');
-    },
-  });
+  if(guardar){
+    $.ajax({
+      url: "/evaluacion/refuse_prospecto",
+      type: "POST",
+      data: "idprospecto="+idprospecto+
+            "&motivo="+motivo,
+      success: function(data) {
+        console.log(data);
+        console.log('process sucess');
+  
+        window.location.href = "http://localhost:3000/evaluacion";
+      },
+      error: function() {
+        console.log('process error');
+      },
+    });
+  }
+  
 
+});
+
+$('.requerido').off('keyup').on('keyup',function (e) { 
+  $(this).removeClass('is-invalid');
 });

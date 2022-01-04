@@ -4,7 +4,7 @@ var connection  = require('../lib/database.js');
 const fs = require('fs');
 const http = require('http');
 
-/* GET home page. */
+
 router.get('/', function(req, res, next) {
   connection.query('SELECT * FROM prospectos ORDER BY id desc',function(err,rows)     {
 
